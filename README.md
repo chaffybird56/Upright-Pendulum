@@ -4,7 +4,7 @@
 
 ---
 
-## 🎬 Demo (mp4)
+## 🎬 Demo
 <div align="center">
   
 https://github.com/user-attachments/assets/7126a784-6d52-4681-a8f2-ded9851cf9db
