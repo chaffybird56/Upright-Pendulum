@@ -135,9 +135,9 @@ With a stable $(A-BK)$ and a stable $(A-LC)$, the combined loop is stable (separ
 
 ## 🗂️ Repo pointers
 
-- `phase4_lab_Students.slx`, `Phase4_Model_Student.slx` — Simulink models (implementation and plant).  
-- `phase4_script_Students.txt` — MATLAB script for $K$ and $L$ design + plots.  
-- `*_actual-*.mat` — logged hardware runs used to produce Fig 6.
+- `files.slx`, — Simulink models (implementation and plant).  
+- `files.m` — MATLAB script for $K$ and $L$ design + plots.  
+- `files.mat` — logged hardware runs used to produce Fig 6.
 
 ---
 
