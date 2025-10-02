@@ -1,9 +1,7 @@
 # 🏗️ Inverted Pendulum — Output‑Feedback Control with a Full‑State Observer
 
-> A two‑link inverted pendulum is held **upright** using a **state‑feedback controller** that acts on a **state estimate** from a full‑state observer. The observer reconstructs the **unmeasured angular rates** so the controller can behave as if every state were measured.
-
+> A two‑link inverted pendulum is held in **upright** motion using a **state‑feedback controller** that acts on a **state estimate** from a full‑state observer. The observer reconstructs the **unmeasured angular rates** so the controller can behave as if every state were measured.
 ---
-
 ## 🎬 Demo
 <div align="center">
   
@@ -11,8 +9,7 @@ https://github.com/user-attachments/assets/7126a784-6d52-4681-a8f2-ded9851cf9db
   
 </div>
 ---
-
-## 🔎 What this project is (plain English)
+## 🔎 What this project is
 
 - The rig has two joint angles, $q_1$ (base) and $q_2$ (link). Only **angles** are measured. The **angular rates** $\dot q_1,\dot q_2$ are not.  
 - The controller needs **all four**: $(q_1,q_2,\dot q_1,\dot q_2)$.  
