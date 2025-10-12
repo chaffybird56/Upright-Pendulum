@@ -9,6 +9,7 @@ https://github.com/user-attachments/assets/7126a784-6d52-4681-a8f2-ded9851cf9db
   
 </div>
 ---
+
 ## 🔎 What this project is
 
 - The rig has two joint angles, $q_1$ (base) and $q_2$ (link). Only **angles** are measured. The **angular rates** $\dot q_1,\dot q_2$ are not.  
