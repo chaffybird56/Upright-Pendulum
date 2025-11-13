@@ -3,8 +3,8 @@ close all;
 
 pole_scaler = 16.39;
 
-load("qm_actual-"+pole_scaler+".mat");
-load("um_actual-"+pole_scaler+".mat");
+load("data/qm_actual-"+pole_scaler+".mat");
+load("data/um_actual-"+pole_scaler+".mat");
 
 q = qm_actual.signals.values;
 t = qm_actual.time;

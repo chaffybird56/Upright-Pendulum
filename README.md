@@ -291,28 +291,37 @@ Upright-Pendulum-main/
 ├── README.md                    # This file
 ├── LICENSE                      # MIT License
 │
-├── model1.slx                  # Simulink control model
-├── model1.1.slx                # Updated Simulink model
+├── scripts/
+│   ├── script_phase.m               # Controller and observer design
+│   └── actual_graph.m               # Hardware data visualization
 │
-├── script_phase.m               # Controller and observer design
-├── actual_graph.m               # Hardware data visualization
+├── models/
+│   ├── model1.slx                  # Simulink control model
+│   └── model1.1.slx                # Updated Simulink model
 │
-├── *.mat                        # Hardware test data files
+├── data/
+│   ├── qm_actual-15.mat            # Hardware test data (angles, 15× observer)
+│   ├── qm_actual-20.mat            # Hardware test data (angles, 20× observer)
+│   ├── um_actual-15.mat            # Hardware test data (input, 15× observer)
+│   └── um_actual-20.mat            # Hardware test data (input, 20× observer)
 │
 ├── hardware/
 │   ├── circuits/
 │   │   ├── sensor_interface.md      # Encoder circuit design
 │   │   ├── actuator_drive.md        # Motor driver circuits
-│   │   ├── power_management.md     # Power supply design
+│   │   ├── power_management.md      # Power supply design
 │   │   └── signal_processing.md     # Signal conditioning
 │   └── pcb/
 │       ├── design_workflow.md       # PCB design process
 │       └── component_selection.md   # Component analysis
 │
-└── tests/
-    ├── README.md                    # Test documentation
-    ├── functional_tests.m           # Functional validation
-    └── environmental_tests.m         # Environmental testing
+├── tests/
+│   ├── README.md                    # Test documentation
+│   ├── functional_tests.m           # Functional validation
+│   └── environmental_tests.m        # Environmental testing
+│
+└── docs/
+    └── PROJECT_STRUCTURE.md          # Project organization documentation
 ```
 
 ---
@@ -334,17 +343,17 @@ Upright-Pendulum-main/
 
 1. **Design Controller and Observer**:
    ```matlab
-   run('script_phase.m')
+   run('scripts/script_phase.m')
    ```
 
 2. **Simulate in Simulink**:
-   - Open `model1.slx` or `model1.1.slx`
+   - Open `models/model1.slx` or `models/model1.1.slx`
    - Run simulation
    - Analyze results
 
 3. **Visualize Hardware Data**:
    ```matlab
-   run('actual_graph.m')
+   run('scripts/actual_graph.m')
    ```
 
 4. **Run Tests**:

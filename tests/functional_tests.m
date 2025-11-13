@@ -93,7 +93,7 @@ fprintf('Test 3: Control Loop Stability Test\n');
 fprintf('------------------------------------\n');
 try
     % Load controller parameters
-    load("ph_device_05.mat");
+    load("data/ph_device_05.mat");
     
     % Build system matrices
     q20 = pi;

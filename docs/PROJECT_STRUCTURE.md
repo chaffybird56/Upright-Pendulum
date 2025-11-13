@@ -73,13 +73,13 @@ Upright-Pendulum-main/
 
 ## Script Dependencies
 
-### script_phase.m
-- **Requires**: `ph_device_05.mat` (system parameters)
+### scripts/script_phase.m
+- **Requires**: `data/ph_device_05.mat` (system parameters)
 - **Generates**: Controller gain `K`, observer gain `L`
 - **Outputs**: Simulation plots, gain matrices
 
-### actual_graph.m
-- **Requires**: `qm_actual-{scaling}.mat`, `um_actual-{scaling}.mat`
+### scripts/actual_graph.m
+- **Requires**: `data/qm_actual-{scaling}.mat`, `data/um_actual-{scaling}.mat`
 - **Configurable**: `pole_scaler` variable (default: 16.39)
 - **Outputs**: Hardware test result plots
 

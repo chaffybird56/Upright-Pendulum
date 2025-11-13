@@ -1,6 +1,6 @@
 clear;
 
-load("ph_device_05.mat")
+load("data/ph_device_05.mat")
 
 q10 = 0;
 q20 = pi;
