@@ -8,34 +8,39 @@ This document describes the organization and naming conventions used in the Inve
 Upright-Pendulum-main/
 ├── README.md                    # Main project documentation
 ├── LICENSE                      # MIT License
-├── PROJECT_STRUCTURE.md         # This file
 ├── .gitignore                   # Git ignore rules
 │
-├── model1.slx                  # Simulink control model (original)
-├── model1.1.slx                # Simulink control model (updated)
+├── scripts/
+│   ├── script_phase.m               # Controller and observer design script
+│   └── actual_graph.m               # Hardware data visualization script
 │
-├── script_phase.m               # Controller and observer design script
-├── actual_graph.m               # Hardware data visualization script
+├── models/
+│   ├── model1.slx                  # Simulink control model (original)
+│   └── model1.1.slx                # Simulink control model (updated)
 │
-├── qm_actual-15.mat            # Hardware test data (15× observer, angles)
-├── qm_actual-20.mat            # Hardware test data (20× observer, angles)
-├── um_actual-15.mat            # Hardware test data (15× observer, input)
-├── um_actual-20.mat            # Hardware test data (20× observer, input)
+├── data/
+│   ├── qm_actual-15.mat            # Hardware test data (15× observer, angles)
+│   ├── qm_actual-20.mat            # Hardware test data (20× observer, angles)
+│   ├── um_actual-15.mat            # Hardware test data (15× observer, input)
+│   └── um_actual-20.mat            # Hardware test data (20× observer, input)
 │
 ├── hardware/
 │   ├── circuits/
 │   │   ├── sensor_interface.md      # Encoder circuit design
-│   │   ├── actuator_drive.md        # Motor driver circuits
-│   │   ├── power_management.md      # Power supply design
-│   │   └── signal_processing.md     # Signal conditioning circuits
+│   │   ├── actuator_drive.md       # Motor driver circuits
+│   │   ├── power_management.md     # Power supply design
+│   │   └── signal_processing.md    # Signal conditioning circuits
 │   └── pcb/
-│       ├── design_workflow.md        # PCB design process
-│       └── component_selection.md    # Component analysis and selection
+│       ├── design_workflow.md       # PCB design process
+│       └── component_selection.md  # Component analysis and selection
 │
-└── tests/
-    ├── README.md                    # Test documentation
-    ├── functional_tests.m           # Functional validation suite
-    └── environmental_tests.m         # Environmental testing suite
+├── tests/
+│   ├── README.md                   # Test documentation
+│   ├── functional_tests.m          # Functional validation suite
+│   └── environmental_tests.m       # Environmental testing suite
+│
+└── docs/
+    └── PROJECT_STRUCTURE.md        # This file
 ```
 
 ## File Naming Conventions
@@ -44,31 +49,35 @@ Upright-Pendulum-main/
 - **Lowercase with underscores**: `script_phase.m`, `actual_graph.m`
 - **Descriptive names**: Clearly indicate file purpose
 - **No spaces**: Use underscores for readability
+- **Location**: All scripts in `scripts/` folder
 
 ### Simulink Models
 - **Lowercase with version numbers**: `model1.slx`, `model1.1.slx`
 - **Incremental versioning**: Use decimal numbers for updates
+- **Location**: All models in `models/` folder
 
 ### Data Files
 - **Descriptive prefixes**: `qm_` for measured angles, `um_` for input voltages
 - **Suffixes indicate conditions**: `-15`, `-20` for observer pole scaling factors
 - **Format**: `.mat` for MATLAB data files
+- **Location**: All data files in `data/` folder
 
 ### Documentation Files
 - **Lowercase with underscores**: `sensor_interface.md`
 - **Descriptive names**: Clearly indicate content
 - **Format**: `.md` for Markdown files
+- **Location**: Hardware docs in `hardware/`, project docs in `docs/`
 
 ## Data File Conventions
 
 ### Hardware Test Data
-- `qm_actual-{scaling}.mat`: Measured joint angles (q1, q2)
+- `data/qm_actual-{scaling}.mat`: Measured joint angles (q1, q2)
   - Contains: `qm_actual.signals.values`, `qm_actual.time`
-- `um_actual-{scaling}.mat`: Applied motor input voltages
+- `data/um_actual-{scaling}.mat`: Applied motor input voltages
   - Contains: `um` (input voltage data)
 
 ### Parameter Files
-- `ph_device_05.mat`: System identification parameters
+- `data/ph_device_05.mat`: System identification parameters
   - Contains: `Ph` vector with physical parameters
 
 ## Script Dependencies
@@ -84,8 +93,8 @@ Upright-Pendulum-main/
 - **Outputs**: Hardware test result plots
 
 ### Test Scripts
-- **functional_tests.m**: Self-contained, uses simulated data
-- **environmental_tests.m**: Self-contained, uses simulated data
+- **tests/functional_tests.m**: Self-contained, uses simulated data
+- **tests/environmental_tests.m**: Self-contained, uses simulated data
 - **Both**: Generate test reports and result files
 
 ## Hardware Documentation Structure
@@ -123,4 +132,3 @@ Each circuit document follows a consistent structure:
 - Commit data files (`.mat`) if small (<10MB)
 - Use descriptive commit messages
 - Tag releases with version numbers
-
