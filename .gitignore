@@ -1,0 +1,42 @@
+# MATLAB
+*.asv
+*.autosave
+*.m~
+*.fig
+*.png
+*.jpg
+*.jpeg
+
+# Simulink
+*.slxc
+*.slprj
+*.sldd
+*.sldx
+*.mdl.autosave
+
+# Build artifacts
+*.mexw64
+*.mexmaci64
+*.mexa64
+
+# Test results
+*_test_results.mat
+*_test_report.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.log
+
+# Large data files (uncomment if needed)
+# *.mat
+
