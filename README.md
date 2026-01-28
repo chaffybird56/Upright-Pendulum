@@ -272,8 +272,9 @@ The **separation principle** guarantees that if both $(A - BK)$ and $(A - LC)$ a
 1. **System Identification**: Linearize pendulum model and identify parameters
 2. **Controller Design**: Compute $K$ via pole placement
 3. **Observer Design**: Compute $L$ with poles 15× faster than controller
-4. **Simulink Model**: Implement observer and controller blocks
-5. **Real-Time Execution**: Run at 1 kHz on STM32F4 microcontroller
+4. **Control System Analysis**: PID tuning, root locus, Bode plots, stability margins
+5. **Simulink Model**: Implement observer and controller blocks
+6. **Real-Time Execution**: Run at 1 kHz on STM32F4 microcontroller
 
 ### Hardware
 
@@ -294,7 +295,9 @@ Upright-Pendulum-main/
 │
 ├── scripts/
 │   ├── script_phase.m               # Controller and observer design
-│   └── actual_graph.m               # Hardware data visualization
+│   ├── actual_graph.m               # Hardware data visualization
+│   ├── control_design_tools.m       # Control system design and analysis
+│   └── pid_tuning_demo.m            # PID tuning method comparison
 │
 ├── models/
 │   ├── model1.slx                  # Simulink control model
@@ -339,6 +342,36 @@ Upright-Pendulum-main/
   - Inverted pendulum rig
   - STM32F4 development board or custom PCB
   - Encoders, motor, power supply
+
+### Control System Design Tools
+
+The project includes control system design and analysis tools for controller development and performance evaluation.
+
+**PID Tuning Methods:**
+- Ziegler-Nichols ultimate gain method for PID parameter selection
+- Cohen-Coon tuning for first-order plus dead time systems
+- Automatic parameter calculation from system step response
+
+**Frequency Domain Analysis:**
+- Root locus plots for gain selection and stability analysis
+- Bode plots showing magnitude and phase response
+- Gain and phase margin calculation for stability assessment
+
+**Time Domain Analysis:**
+- Step response with performance metrics including rise time, settling time, and overshoot
+- Open-loop versus closed-loop comparison
+- Steady-state error analysis
+
+**Usage:**
+```matlab
+% Run comprehensive control design analysis
+run('scripts/control_design_tools.m')
+
+% Compare PID tuning methods
+run('scripts/pid_tuning_demo.m')
+```
+
+The scripts generate plots showing root locus, Bode plots, step responses, and stability margins, providing a complete view of the control system's performance characteristics.
 
 ### Running the Code
 
