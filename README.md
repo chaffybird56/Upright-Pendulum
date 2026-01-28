@@ -34,6 +34,7 @@ The magic happens 1000 times per second—fast enough that the pendulum never fa
 This is a **complete mechatronics system** combining:
 
 - ✅ **Control Theory**: State-feedback control with full-state observer
+- ✅ **Control System Design**: PID tuning (Ziegler-Nichols, Cohen-Coon), root locus analysis, Bode plots, stability margins
 - ✅ **Hardware Design**: Custom analogue and digital circuits for sensors and actuators
 - ✅ **Power Management**: Efficient power supplies and protection circuits
 - ✅ **Signal Processing**: Filtering and conditioning for clean sensor data
