@@ -1,160 +1,160 @@
-# 🎯 Inverted Pendulum Control System
+# Inverted Pendulum Control System
 
-> **Imagine balancing a stick on your finger.** Now imagine doing it automatically with a robot. This project does exactly that—using advanced control theory, custom electronics, and real-time software to keep an inverted pendulum perfectly balanced.
+> **Imagine balancing a stick on your finger.**Now imagine doing it automatically with a robot. This project does exactly that—using advanced control theory, custom electronics, and real-time software to keep an inverted pendulum perfectly balanced.
 
 ---
 
-## 🎬 See It In Action
+## See It In Action
 
 <div align="center">
-  
+
 https://github.com/user-attachments/assets/7126a784-6d52-4681-a8f2-ded9851cf9db
-  
+
 </div>
 
 ---
 
-## 🧠 What's the Big Idea? (Simple Explanation)
+## What's the Big Idea? (Simple Explanation)
 
 Think of balancing a broomstick on your palm. You can see where the stick is (the angle), but you can't directly feel how fast it's moving. Yet your brain somehow figures it out and moves your hand to keep it balanced.
 
 **This project replicates that process:**
 
-1. **Sensors** measure the pendulum's angle (like your eyes seeing the stick)
-2. **A "smart guesser"** (called an observer) figures out how fast it's moving (like your brain estimating speed)
-3. **A controller** calculates the right motor command to keep it balanced (like your hand moving)
-4. **Custom circuits** translate these commands into actual motor movements
+1. **Sensors**measure the pendulum's angle (like your eyes seeing the stick)
+2. **A "smart guesser"**(called an observer) figures out how fast it's moving (like your brain estimating speed)
+3. **A controller**calculates the right motor command to keep it balanced (like your hand moving)
+4. **Custom circuits**translate these commands into actual motor movements
 
 The magic happens 1000 times per second—fast enough that the pendulum never falls!
 
 ---
 
-## 🎯 What This Project Includes
+## What This Project Includes
 
-This is a **complete mechatronics system** combining:
+This is a **complete mechatronics system**combining:
 
-- ✅ **Control Theory**: State-feedback control with full-state observer
-- ✅ **Hardware Design**: Custom analogue and digital circuits for sensors and actuators
-- ✅ **Power Management**: Efficient power supplies and protection circuits
-- ✅ **Signal Processing**: Filtering and conditioning for clean sensor data
-- ✅ **PCB Design**: Complete printed circuit board design workflow
-- ✅ **Testing Infrastructure**: Comprehensive functional and environmental tests
+- **Control Theory**: State-feedback control with full-state observer
+- **Hardware Design**: Custom analogue and digital circuits for sensors and actuators
+- **Power Management**: Efficient power supplies and protection circuits
+- **Signal Processing**: Filtering and conditioning for clean sensor data
+- **PCB Design**: Complete printed circuit board design workflow
+- **Testing Infrastructure**: Comprehensive functional and environmental tests
 
 ---
 
-## 🖼️ How It Works (Visual)
+## How It Works (Visual)
 
 <div align="center">
-  <img width="489" height="387" alt="Inverted pendulum schematic" src="https://github.com/user-attachments/assets/f4cb9196-2bcc-4371-b61f-13483633afde" />
-  <br/>
-  <sub><b>Mechanism Overview.</b> A rotary base (joint 1) moves the pendulum link (joint 2). Sensors measure angles; the controller estimates velocities and commands the motor.</sub>
+ <img width="489" height="387" alt="Inverted pendulum schematic" src="https://github.com/user-attachments/assets/f4cb9196-2bcc-4371-b61f-13483633afde" />
+ <br/>
+ <sub><b>Mechanism Overview.</b> A rotary base (joint 1) moves the pendulum link (joint 2). Sensors measure angles; the controller estimates velocities and commands the motor.</sub>
 </div>
 
 ---
 
-## 🔧 System Architecture
+## System Architecture
 
 ### The Control Problem
 
 The pendulum has **two joints**:
-- **Joint 1** (base): Can rotate horizontally
-- **Joint 2** (pendulum): The link that needs to stay upright
+- **Joint 1**(base): Can rotate horizontally
+- **Joint 2**(pendulum): The link that needs to stay upright
 
-We can **measure** the angles ($q_1$, $q_2$), but we **can't directly measure** how fast they're changing ($\dot{q}_1$, $\dot{q}_2$). However, the controller needs all four values to work properly.
+We can **measure**the angles ($q_1$, $q_2$), but we **can't directly measure**how fast they're changing ($\dot{q}_1$, $\dot{q}_2$). However, the controller needs all four values to work properly.
 
 ### The Solution: Observer-Based Control
 
 Instead of measuring everything, we:
 
-1. **Predict** what the velocities should be (using a mathematical model)
-2. **Compare** our predictions to the actual measured angles
-3. **Correct** our predictions based on the difference
-4. **Control** the motor using these corrected estimates
+1. **Predict**what the velocities should be (using a mathematical model)
+2. **Compare**our predictions to the actual measured angles
+3. **Correct**our predictions based on the difference
+4. **Control**the motor using these corrected estimates
 
-This happens continuously in a feedback loop running at **1 kHz** (1000 times per second).
+This happens continuously in a feedback loop running at **1 kHz**(1000 times per second).
 
 ---
 
-## 🛠️ Hardware Implementation
+## Hardware Implementation
 
 ### Sensor Interface Circuits
 
-**Encoders** measure joint angles with high precision:
+**Encoders**measure joint angles with high precision:
 - **Type**: Incremental optical encoders (2048 pulses/revolution)
 - **Interface**: Quadrature decoding via LS7366R ICs
 - **Signal Conditioning**: Noise filtering and level shifting
 - **Communication**: SPI interface to microcontroller
 
-📄 **Details**: See [`hardware/circuits/sensor_interface.md`](hardware/circuits/sensor_interface.md)
+ **Details**: See [`hardware/circuits/sensor_interface.md`](hardware/circuits/sensor_interface.md)
 
 ### Actuator Drive Circuits
 
-**DC Motor** drives the base to balance the pendulum:
+**DC Motor**drives the base to balance the pendulum:
 - **Power**: 24V DC, 2A continuous (5A peak)
 - **Driver**: DRV8871 H-bridge with integrated current sensing
 - **Control**: 20 kHz PWM for smooth operation
 - **Protection**: Overcurrent and thermal shutdown
 
-📄 **Details**: See [`hardware/circuits/actuator_drive.md`](hardware/circuits/actuator_drive.md)
+ **Details**: See [`hardware/circuits/actuator_drive.md`](hardware/circuits/actuator_drive.md)
 
 ### Power Management
 
-**Efficient power distribution** for all subsystems:
+**Efficient power distribution**for all subsystems:
 - **24V Input**: Main power supply (wall adapter or battery)
 - **3.3V Regulator**: For microcontroller and digital logic (85% efficiency)
 - **5V Regulator**: For encoder power (88% efficiency)
 - **Protection**: Overvoltage, undervoltage, and overcurrent protection
 
-📄 **Details**: See [`hardware/circuits/power_management.md`](hardware/circuits/power_management.md)
+ **Details**: See [`hardware/circuits/power_management.md`](hardware/circuits/power_management.md)
 
 ### Signal Processing
 
-**Clean, accurate sensor data** through:
+**Clean, accurate sensor data**through:
 - **Anti-aliasing Filters**: Remove high-frequency noise before ADC
 - **Current Sensing**: Precise motor current measurement (1.2 mA resolution)
 - **Voltage Monitoring**: System voltage tracking for diagnostics
 - **Digital Filtering**: Software filters for angle rate estimation
 
-📄 **Details**: See [`hardware/circuits/signal_processing.md`](hardware/circuits/signal_processing.md)
+ **Details**: See [`hardware/circuits/signal_processing.md`](hardware/circuits/signal_processing.md)
 
 ### PCB Design
 
-**Complete printed circuit board** design:
+**Complete printed circuit board**design:
 - **4-Layer Stackup**: Signal, ground, power planes
 - **Component Selection**: Detailed analysis and alternatives
 - **Layout Guidelines**: Thermal management, EMI reduction
 - **Manufacturing**: Gerber files, BOM, assembly notes
 
-📄 **Details**: 
+ **Details**:
 - [`hardware/pcb/design_workflow.md`](hardware/pcb/design_workflow.md)
 - [`hardware/pcb/component_selection.md`](hardware/pcb/component_selection.md)
 
 ---
 
-## 🧪 Testing Infrastructure
+## Testing Infrastructure
 
 ### Functional Tests
 
 Comprehensive validation of all system components:
-- ✅ Sensor accuracy and noise levels
-- ✅ Actuator response time and characteristics
-- ✅ Control loop stability
-- ✅ Observer performance
-- ✅ Signal processing accuracy
-- ✅ Power management
+- Sensor accuracy and noise levels
+- Actuator response time and characteristics
+- Control loop stability
+- Observer performance
+- Signal processing accuracy
+- Power management
 
-📄 **Details**: See [`tests/functional_tests.m`](tests/functional_tests.m)
+ **Details**: See [`tests/functional_tests.m`](tests/functional_tests.m)
 
 ### Environmental Tests
 
 Reliability testing under various conditions:
-- 🌡️ **Temperature**: Operation from -10°C to 60°C
-- 📳 **Vibration**: Resistance to 10-1000 Hz mechanical vibration
-- ⏱️ **Extended Operation**: 1-hour continuous operation test
-- ⚡ **Power Variation**: Behavior with 20-28V input voltage
-- 🔄 **Thermal Cycling**: Rapid temperature change stress test
+- **Temperature**: Operation from -10°C to 60°C
+- **Vibration**: Resistance to 10-1000 Hz mechanical vibration
+- ⏱ **Extended Operation**: 1-hour continuous operation test
+- **Power Variation**: Behavior with 20-28V input voltage
+- **Thermal Cycling**: Rapid temperature change stress test
 
-📄 **Details**: See [`tests/environmental_tests.m`](tests/environmental_tests.m)
+ **Details**: See [`tests/environmental_tests.m`](tests/environmental_tests.m)
 
 **Run Tests**:
 ```matlab
@@ -167,14 +167,14 @@ run('tests/environmental_tests.m')
 
 ---
 
-## 📊 Results
+## Results
 
 ### Simulink Model
 
 <div align="center">
-  <img width="1364" height="598" alt="Simulink output-feedback model" src="https://github.com/user-attachments/assets/3a961c7f-32f5-4fa5-b72f-3da6a6880622" />
-  <br/>
-  <sub><b>Control System Implementation.</b> Observer estimates unmeasured states; controller applies state-feedback using estimates.</sub>
+ <img width="1364" height="598" alt="Simulink output-feedback model" src="https://github.com/user-attachments/assets/3a961c7f-32f5-4fa5-b72f-3da6a6880622" />
+ <br/>
+ <sub><b>Control System Implementation.</b> Observer estimates unmeasured states; controller applies state-feedback using estimates.</sub>
 </div>
 
 ### Hardware Performance
@@ -184,14 +184,14 @@ After tuning the observer speed:
 - **15× scaling**: Smooth behavior with minimal control effort
 
 <div align="center">
-  <img width="792" height="625" alt="Angles and input with 15x observer" src="https://github.com/user-attachments/assets/b8629492-9a30-47a2-9251-c27f8793486b" />
-  <br/>
-  <sub><b>Hardware Results.</b> Joint angles (top) and motor voltage (bottom) with observer poles at 15× the controller poles.</sub>
+ <img width="792" height="625" alt="Angles and input with 15x observer" src="https://github.com/user-attachments/assets/b8629492-9a30-47a2-9251-c27f8793486b" />
+ <br/>
+ <sub><b>Hardware Results.</b> Joint angles (top) and motor voltage (bottom) with observer poles at 15× the controller poles.</sub>
 </div>
 
 ---
 
-## 🧮 The Mathematics (Technical Deep Dive)
+## The Mathematics (Technical Deep Dive)
 
 ### System Model
 
@@ -221,16 +221,16 @@ $$
 u = -K x \quad \Rightarrow \quad \dot{x} = (A - B K) x
 $$
 
-The gain matrix $K$ is designed via **pole placement** to achieve desired closed-loop eigenvalues:
+The gain matrix $K$ is designed via **pole placement**to achieve desired closed-loop eigenvalues:
 
 $$
 \lambda_{desired} = \{-10 \pm 10j,\ -15,\ -18\}
 $$
 
 These poles provide:
-- **Fast response** (real parts around -10 to -18)
-- **Good damping** (complex poles with damping ratio ~0.707)
-- **Stability** (all poles in left half-plane)
+- **Fast response**(real parts around -10 to -18)
+- **Good damping**(complex poles with damping ratio ~0.707)
+- **Stability**(all poles in left half-plane)
 
 ### Full-State Observer
 
@@ -240,7 +240,7 @@ $$
 \dot{\hat{x}} = A \hat{x} + B u + L(y - C \hat{x})
 $$
 
-The correction term $L(y - C\hat{x})$ drives the estimate toward the true state. The observer gain $L$ is designed so that $(A - LC)$ has eigenvalues **15× faster** than the controller poles, ensuring rapid convergence.
+The correction term $L(y - C\hat{x})$ drives the estimate toward the true state. The observer gain $L$ is designed so that $(A - LC)$ has eigenvalues **15× faster**than the controller poles, ensuring rapid convergence.
 
 ### Estimation Error Dynamics
 
@@ -260,11 +260,11 @@ $$
 u = -K \hat{x}
 $$
 
-The **separation principle** guarantees that if both $(A - BK)$ and $(A - LC)$ are stable, the combined system is stable.
+The **separation principle**guarantees that if both $(A - BK)$ and $(A - LC)$ are stable, the combined system is stable.
 
 ---
 
-## 💻 Implementation Details
+## Implementation Details
 
 ### Software
 
@@ -284,92 +284,92 @@ The **separation principle** guarantees that if both $(A - BK)$ and $(A - LC)$ a
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Upright-Pendulum-main/
-├── README.md                    # This file
-├── LICENSE                      # MIT License
+├── README.md # This file
+├── LICENSE # MIT License
 │
 ├── scripts/
-│   ├── script_phase.m               # Controller and observer design
-│   └── actual_graph.m               # Hardware data visualization
+│ ├── script_phase.m # Controller and observer design
+│ └── actual_graph.m # Hardware data visualization
 │
 ├── models/
-│   ├── model1.slx                  # Simulink control model
-│   └── model1.1.slx                # Updated Simulink model
+│ ├── model1.slx # Simulink control model
+│ └── model1.1.slx # Updated Simulink model
 │
 ├── data/
-│   ├── qm_actual-15.mat            # Hardware test data (angles, 15× observer)
-│   ├── qm_actual-20.mat            # Hardware test data (angles, 20× observer)
-│   ├── um_actual-15.mat            # Hardware test data (input, 15× observer)
-│   └── um_actual-20.mat            # Hardware test data (input, 20× observer)
+│ ├── qm_actual-15.mat # Hardware test data (angles, 15× observer)
+│ ├── qm_actual-20.mat # Hardware test data (angles, 20× observer)
+│ ├── um_actual-15.mat # Hardware test data (input, 15× observer)
+│ └── um_actual-20.mat # Hardware test data (input, 20× observer)
 │
 ├── hardware/
-│   ├── circuits/
-│   │   ├── sensor_interface.md      # Encoder circuit design
-│   │   ├── actuator_drive.md        # Motor driver circuits
-│   │   ├── power_management.md      # Power supply design
-│   │   └── signal_processing.md     # Signal conditioning
-│   └── pcb/
-│       ├── design_workflow.md       # PCB design process
-│       └── component_selection.md   # Component analysis
+│ ├── circuits/
+│ │ ├── sensor_interface.md # Encoder circuit design
+│ │ ├── actuator_drive.md # Motor driver circuits
+│ │ ├── power_management.md # Power supply design
+│ │ └── signal_processing.md # Signal conditioning
+│ └── pcb/
+│ ├── design_workflow.md # PCB design process
+│ └── component_selection.md # Component analysis
 │
 ├── tests/
-│   ├── README.md                    # Test documentation
-│   ├── functional_tests.m           # Functional validation
-│   └── environmental_tests.m        # Environmental testing
+│ ├── README.md # Test documentation
+│ ├── functional_tests.m # Functional validation
+│ └── environmental_tests.m # Environmental testing
 │
 └── docs/
-    └── PROJECT_STRUCTURE.md          # Project organization documentation
+ └── PROJECT_STRUCTURE.md # Project organization documentation
 ```
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
-- **MATLAB** (R2018b or later) with:
-  - Control System Toolbox
-  - Simulink
-  - Signal Processing Toolbox (for tests)
-- **Hardware** (optional, for physical implementation):
-  - Inverted pendulum rig
-  - STM32F4 development board or custom PCB
-  - Encoders, motor, power supply
+- **MATLAB**(R2018b or later) with:
+ - Control System Toolbox
+ - Simulink
+ - Signal Processing Toolbox (for tests)
+- **Hardware**(optional, for physical implementation):
+ - Inverted pendulum rig
+ - STM32F4 development board or custom PCB
+ - Encoders, motor, power supply
 
 ### Running the Code
 
 1. **Design Controller and Observer**:
-   ```matlab
-   run('scripts/script_phase.m')
-   ```
+ ```matlab
+ run('scripts/script_phase.m')
+ ```
 
 2. **Simulate in Simulink**:
-   - Open `models/model1.slx` or `models/model1.1.slx`
-   - Run simulation
-   - Analyze results
+ - Open `models/model1.slx` or `models/model1.1.slx`
+ - Run simulation
+ - Analyze results
 
 3. **Visualize Hardware Data**:
-   ```matlab
-   run('scripts/actual_graph.m')
-   ```
+ ```matlab
+ run('scripts/actual_graph.m')
+ ```
 
 4. **Run Tests**:
-   ```matlab
-   run('tests/functional_tests.m')
-   run('tests/environmental_tests.m')
-   ```
+ ```matlab
+ run('tests/functional_tests.m')
+ run('tests/environmental_tests.m')
+ ```
 
 ---
 
-## 📌 Key Design Decisions
+## Key Design Decisions
 
 ### Observer Speed vs. Noise
 
-- **Faster observers** track better but amplify sensor noise
-- **Slower observers** are more robust but lag behind
+- **Faster observers**track better but amplify sensor noise
+- **Slower observers**are more robust but lag behind
 - **Sweet spot**: Observer poles ~15× faster than controller poles
 
 ### Actuator Limits
@@ -386,7 +386,7 @@ Upright-Pendulum-main/
 
 ---
 
-## 🎓 Learning Resources
+## Learning Resources
 
 ### Control Theory Concepts
 
@@ -404,25 +404,25 @@ Upright-Pendulum-main/
 
 ---
 
-## 🧠 Glossary
+## Glossary
 
-**State Feedback** — Control law $u = -Kx$ using full state vector  
-**Full-State Observer** — Estimator $\dot{\hat{x}} = A\hat{x} + Bu + L(y - C\hat{x})$ that reconstructs unmeasured states  
-**Pole Placement** — Design method choosing eigenvalues of $(A-BK)$ or $(A-LC)$ to shape system dynamics  
-**Separation Principle** — Allows independent design of controller ($K$) and observer ($L$); stability of both implies closed-loop stability  
-**Quadrature Decoder** — Circuit that converts encoder A/B signals into position counts  
-**H-Bridge** — Motor driver circuit allowing bidirectional current flow  
-**PWM** — Pulse-width modulation for efficient motor control  
+**State Feedback**— Control law $u = -Kx$ using full state vector
+**Full-State Observer**— Estimator $\dot{\hat{x}} = A\hat{x} + Bu + L(y - C\hat{x})$ that reconstructs unmeasured states
+**Pole Placement**— Design method choosing eigenvalues of $(A-BK)$ or $(A-LC)$ to shape system dynamics
+**Separation Principle**— Allows independent design of controller ($K$) and observer ($L$); stability of both implies closed-loop stability
+**Quadrature Decoder**— Circuit that converts encoder A/B signals into position counts
+**H-Bridge**— Motor driver circuit allowing bidirectional current flow
+**PWM** — Pulse-width modulation for efficient motor control
 
 ---
 
-## 📄 License
+## License
 
 MIT License — see [`LICENSE`](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 This project demonstrates the integration of:
 - Control systems theory
@@ -431,4 +431,4 @@ This project demonstrates the integration of:
 - PCB layout and manufacturing
 - System testing and validation
 
-A complete mechatronics system from theory to hardware! 🎯
+A complete mechatronics system from theory to hardware!
